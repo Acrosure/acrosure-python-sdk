@@ -22,25 +22,31 @@ class DataTestCase(unittest.TestCase):
 
     def test_get_data_value_with_no_dependencies( self ):
         data = self.data
-        values = data.get({
+        resp = data.get({
             "handler": "province"
         })
+        self.assertEqual(resp["status"], "ok")
+        values = resp["data"]
         self.assertIsInstance(values, list)
 
     def test_get_data_value_with_one_dependencies( self ):
         data = self.data
-        values = data.get({
+        resp = data.get({
             "handler": "district",
             "dependencies": ["กรุงเทพมหานคร"]
         })
+        self.assertEqual(resp["status"], "ok")
+        values = resp["data"]
         self.assertIsInstance(values, list)
 
     def test_get_data_value_with_two_dependencies( self ):
         data = self.data
-        values = data.get({
+        resp = data.get({
             "handler": "subdistrict",
             "dependencies": ["กรุงเทพมหานคร", "ห้วยขวาง"]
         })
+        self.assertEqual(resp["status"], "ok")
+        values = resp["data"]
         self.assertIsInstance(values, list)
 
 if __name__ == '__main__':

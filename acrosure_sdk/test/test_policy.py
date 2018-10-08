@@ -24,13 +24,17 @@ class PolicyTestCase(unittest.TestCase):
 
     def test_get_policy_detail( self ):
         policy = self.policy
-        policy_detail = policy.get(TEST_POLICY_ID)
+        resp = policy.get(TEST_POLICY_ID)
+        self.assertEqual(resp["status"], "ok")
+        policy_detail = resp["data"]
         self.assertIsInstance(policy_detail, dict)
         self.assertEqual(policy_detail["id"], TEST_POLICY_ID)
 
     def test_list_policies( self ):
         policy = self.policy
-        policies = policy.list()
+        resp = policy.list()
+        self.assertEqual(resp["status"], "ok")
+        policies = resp["data"]
         self.assertIsInstance(policies, list)
 
 if __name__ == '__main__':

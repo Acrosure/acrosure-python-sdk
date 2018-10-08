@@ -16,7 +16,9 @@ class ApplicationRemainingEndPointsTestCase(unittest.TestCase):
 
     def test_list_applications( self ):
         application = self.application
-        applications = application.list()
+        resp = application.list()
+        self.assertEqual(resp["status"], "ok")
+        applications = resp["data"]
         self.assertIsInstance(applications, list)
 
 if __name__ == '__main__':

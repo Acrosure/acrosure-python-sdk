@@ -24,13 +24,17 @@ class ProductTestCase(unittest.TestCase):
 
     def test_get_product_detail( self ):
         product = self.product
-        product_detail = product.get(TEST_PRODUCT_ID)
+        resp = product.get(TEST_PRODUCT_ID)
+        self.assertEqual(resp["status"], "ok")
+        product_detail = resp["data"]
         self.assertIsInstance(product_detail, dict)
         self.assertEqual(product_detail["id"], TEST_PRODUCT_ID)
 
     def test_list_products( self ):
         product = self.product
-        products = product.list()
+        resp = product.list()
+        self.assertEqual(resp["status"], "ok")
+        products = resp["data"]
         self.assertIsInstance(products, list)
 
 if __name__ == '__main__':
