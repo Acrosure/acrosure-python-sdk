@@ -51,12 +51,12 @@ class ProductManager:
         except Exception as err:
             raise err
 
-    def list( self, query ):
+    def list( self, query = {} ):
         """
         Get products list with or without query.
         Parameters
         ----------
-        query : dict
+        query : dict, optional
             Query object (See Acrosure API document for more detail).
 
         Returns

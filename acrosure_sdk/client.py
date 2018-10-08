@@ -7,6 +7,7 @@ from .application import ApplicationManager
 from .product import ProductManager
 from .policy import PolicyManager
 from .data import DataManager
+from .team import TeamManager
 
 class AcrosureClient:
     """
@@ -55,6 +56,7 @@ class AcrosureClient:
         self.policy = PolicyManager(id = None, call_api =call_api)
         # self.policy = PolicyManager(call_api = call_api)
         self.data = DataManager(call_api = call_api)
+        self.team = TeamManager(call_api = call_api)
     
     def call_api( self, path, data = None ): # TODO make data mandatory / not callable
         """

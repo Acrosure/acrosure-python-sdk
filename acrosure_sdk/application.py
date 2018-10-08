@@ -49,19 +49,19 @@ class ApplicationManager:
             resp = self.call_api("/success", {
                 "application_id": self.id
             })
-            if resp["status"]:
-                self.status = resp["status"]
+            if resp.get("data", {}).get("status"):
+                self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
             raise err
 
-    def list( self, query ):
+    def list( self, query = {} ):
         """
         Get applications list with or without query.
 
         Parameters
         ----------
-        query : dict
+        query : dict, optional
             Query object (See Acrosure API document for more detail).
 
         Returns
@@ -139,10 +139,10 @@ class ApplicationManager:
             resp = self.call_api("/applications/create", body)
             if not resp:
                 raise("no response")
-            if resp.get("id"):
-                self.id = resp.get("id")
-            if resp.get("status"):
-                self.id = resp.get("status")
+            if resp.get("data", {}).get("id"):
+                self.id = resp.get("data").get("id")
+            if resp.get("data", {}).get("status"):
+                self.status = resp.get("data").get("status")
         except Exception as err:
             raise err
 
@@ -210,10 +210,8 @@ class ApplicationManager:
                 "step": step
             })
             resp = self.call_api("/applications/update", body)
-            if not resp:
-                raise("no response")
-            if resp.get("status"):
-                self.id = resp.get("status")
+            if resp.get("data", {}).get("status"):
+                self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
             raise err
@@ -290,10 +288,8 @@ class ApplicationManager:
             resp = self.call_api("/applications/submit", {
                 "application_id": self.id
             })
-            if not resp:
-                raise("no response")
-            if resp.get("status"):
-                self.status = resp.status
+            if resp.get("data", {}).get("status"):
+                self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
             raise err
@@ -311,10 +307,8 @@ class ApplicationManager:
             resp = self.call_api("/applications/confirm", {
                 "application_id": self.id
             })
-            if not resp:
-                raise("no response")
-            if resp.get("status"):
-                self.status = resp.status
+            if resp.get("data", {}).get("status"):
+                self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
             raise err
@@ -339,10 +333,6 @@ class ApplicationManager:
                 "application_id": self.id,
                 "frontend_url": args.get("frontend_url")
             })
-            if not resp:
-                raise("no response")
-            if resp.get("status"):
-                self.status = resp.status
             return resp
         except Exception as err:
             raise err
