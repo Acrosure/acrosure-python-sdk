@@ -6,10 +6,11 @@ from ..application import ApplicationManager
 
 from .constants import (
     TEST_PUBLIC_KEY,
-    SUBMIT_APP_DATA,
+    TEST_SECRET_KEY,
+    CONFIRM_APP_DATA,
 )
 
-class ApplicationTestCase(unittest.TestCase):
+class ApplicationFlowTestCase(unittest.TestCase):
 
     def setUp( self ):
         self.client = AcrosureClient(TEST_PUBLIC_KEY)
@@ -24,20 +25,14 @@ class ApplicationTestCase(unittest.TestCase):
     
     def test_create_with_empty_data( self ):
         application = self.application
-        created_app = application.create(SUBMIT_APP_DATA["product_id"])
+        created_app = application.create(CONFIRM_APP_DATA["product_id"])
         self.assertTrue(created_app)
         self.assertTrue(created_app["id"])
         self.assertEqual(created_app["status"], "INITIAL")
-
-    def test_get_application( self ):
-        application = self.application
-        got_application = application.get()
-        self.assertTrue(got_application)
-        self.assertTrue(got_application["id"], application.id)
     
     def test_update_application( self ):
         application = self.application
-        updated_application = application.update( basic_data = SUBMIT_APP_DATA["basic_data"] )
+        updated_application = application.update( basic_data = CONFIRM_APP_DATA["basic_data"] )
         self.assertTrue(updated_application)
         self.assertTrue(updated_application["id"])
         self.assertEqual(updated_application["status"], "PACKAGE_REQUIRED")
@@ -64,31 +59,25 @@ class ApplicationTestCase(unittest.TestCase):
     def test_update_application_with_completed_data( self ):
         application = self.application
         updated_application = application.update(
-            basic_data = SUBMIT_APP_DATA["basic_data"],
-            package_options = SUBMIT_APP_DATA["package_options"],
-            additional_data = SUBMIT_APP_DATA["additional_data"]
+            basic_data = CONFIRM_APP_DATA["basic_data"],
+            package_options = CONFIRM_APP_DATA["package_options"],
+            additional_data = CONFIRM_APP_DATA["additional_data"]
         ) 
         self.assertTrue(updated_application)
         self.assertTrue(updated_application["id"])
         self.assertEqual(updated_application["status"], "READY")
     
-    # def test_get_2c2p_hash_form( self ):
-    #     application = self.application
-    #     hash_form = application.get_2
-
-#   it('get 2c2p hash form', async () => {
-#     const hashForm = await application.get2C2PForm({
-#       frontend_url: 'https://acrosure.com'
-#     })
-#     expect(hashForm).toBeInstanceOf(HTMLFormElement)
-#   })
-
-    def test_submit_application( self ):
+    def test_confirm_application( self ):
         application = self.application
-        submitted_application = application.submit()
-        self.assertTrue(submitted_application)
-        self.assertTrue(submitted_application["id"])
-        self.assertEqual(submitted_application["status"], "SUBMITTED")
+        admin_client = AcrosureClient(
+            token = TEST_SECRET_KEY,
+            application_id = application.id
+        )
+        user_application = admin_client.application
+        confirmed_application = user_application.confirm()
+        self.assertTrue(confirmed_application)
+        self.assertTrue(confirmed_application["id"])
+        self.assertEqual(confirmed_application["status"], "CONFIRMING")
 
 if __name__ == '__main__':
     unittest.main()
