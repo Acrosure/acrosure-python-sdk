@@ -1,2 +1,3 @@
 #!/bin/sh
-python3 setup.py sdist bdist_wheel && pip install -e .
+python3 setup.py sdist bdist_wheel && pip install -e . &&
+python2 setup.py sdist bdist_wheel && pip install -e .

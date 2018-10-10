@@ -12,10 +12,10 @@ class ProductManager:
         call_api : function
             A function which call Acrosure API.
         """
-        self.id = id
+        self.id = id # TODO Remove this
         self.call_api = call_api
-
-    def set_id( self, id ):
+ 
+    def set_id( self, id ): # TODO Remove this
         """
         Set current product id.
 
@@ -26,13 +26,13 @@ class ProductManager:
         """
         self.id = id
 
-    def get( self, id = None ):
+    def get( self, product_id ):
         """
         Get product with specify id or with current id.
 
         Parameters
         ----------
-        id : str, optional
+        product_id : str
             A product id.
 
         Returns
@@ -41,11 +41,8 @@ class ProductManager:
             product.
         """
         try:
-            if id:
-                self.id = id
-            # resp = self.call_api("/products/get", {
-            resp = self.call_api("/success", {
-                "product_id": self.id
+            resp = self.call_api("/products/get", {
+                "product_id": product_id
             })
             return resp
         except Exception as err:

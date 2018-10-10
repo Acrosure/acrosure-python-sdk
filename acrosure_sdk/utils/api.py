@@ -8,12 +8,21 @@ def api( path, body = None, token = None):
         headers = {"Content-Type": "application/json"}
         if token:
             headers["Authorization"] = "Bearer " + token
-        response = requests.get(API_URL + path,
-            # data = json.dumps(body),
+        # print("##############################")
+        # print(json.dumps(body))
+        # print(API_URL + path)
+        # print(headers)
+        # print("##############################")
+        response = requests.post(API_URL + path,
+            data = json.dumps(body),
             headers = headers)
+        # print("RESPONSE")
+        # print(response)
         if not response:
             raise Exception("no response")
         data = response.json()
+        # print("DATA")
+        # print(data)
         return data
     except Exception as err:
         # console.warn(err)

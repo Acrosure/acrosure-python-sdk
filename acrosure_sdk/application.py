@@ -14,10 +14,10 @@ class ApplicationManager:
         call_api : function
             A function which call Acrosure API.
         """
-        self.id = id
+        self.id = id # TODO Remove this
         self.call_api = call_api
 
-    def set_id( self, id ):
+    def set_id( self, id ): # TODO Remove this
         """
         Set current application id.
 
@@ -28,13 +28,13 @@ class ApplicationManager:
         """
         self.id = id
 
-    def get( self, id = None ):
+    def get( self, application_id ):
         """
         Get an application with specify id or with current id.
 
         Parameters
         ----------
-        id : str, optional
+        application_id : str
             An application id.
 
         Returns
@@ -43,13 +43,10 @@ class ApplicationManager:
             An application.
         """
         try:
-            if id:
-                self.id = id
-            # resp = self.call_api("/applications/get", {
-            resp = self.call_api("/success", {
-                "application_id": self.id
+            resp = self.call_api("/applications/get", {
+                "application_id": application_id
             })
-            if resp.get("data", {}).get("status"):
+            if resp.get("data", {}).get("status"): # TODO Remove this
                 self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
@@ -139,16 +136,17 @@ class ApplicationManager:
             resp = self.call_api("/applications/create", body)
             if not resp:
                 raise("no response")
-            if resp.get("data", {}).get("id"):
+            if resp.get("data", {}).get("id"): # TODO remove id
                 self.id = resp.get("data").get("id")
-            if resp.get("data", {}).get("status"):
+            if resp.get("data", {}).get("status"): # TODO remove status
                 self.status = resp.get("data").get("status")
+            return resp
         except Exception as err:
             raise err
 
     def update(
         self,
-        application_id = None,
+        application_id,
         basic_data = None,
         package_options = None,
         additional_data = None,
@@ -165,7 +163,7 @@ class ApplicationManager:
 
         Parameters
         ----------
-        application_id : str, optional
+        application_id : str
             An application id.
         basic_data : dict, optional
             Application's basic_data.
@@ -194,10 +192,8 @@ class ApplicationManager:
             Updated application.
         """
         try:
-            if application_id:
-                self.id = application_id
             body = decorate({
-                "application_id": self.id,
+                "application_id": application_id,
                 "basic_data": basic_data,
                 "package_options": package_options,
                 "additional_data": additional_data ,
@@ -210,15 +206,20 @@ class ApplicationManager:
                 "step": step
             })
             resp = self.call_api("/applications/update", body)
-            if resp.get("data", {}).get("status"):
+            if resp.get("data", {}).get("status"): # TODO Remove this
                 self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
             raise err
     
-    def get_packages( self ):
+    def get_packages( self, application_id ):
         """
         Get available packages for current application.
+
+        Parameters
+        ----------
+        application_id : str
+            An application id.
 
         Returns
         -------
@@ -227,15 +228,20 @@ class ApplicationManager:
         """
         try:
             resp = self.call_api("/applications/get-packages", {
-                "application_id": self.id
+                "application_id": application_id
             })
             return resp
         except Exception as err:
             raise err
 
-    def get_package( self ):
+    def get_package( self, application_id ):
         """
         Get current application's package.
+
+        Parameters
+        ----------
+        application_id : str
+            An application id.
 
         Returns
         -------
@@ -244,18 +250,20 @@ class ApplicationManager:
         """
         try:
             resp = self.call_api("/applications/get-package", {
-                "application_id": self.id
+                "application_id": application_id
             })
             return resp
         except Exception as err:
             raise err
 
-    def select_package( self, args ):
+    def select_package( self, application_id, args ):
         """
         Select package for current application.
 
         Parameters
         ----------
+        application_id : str
+            An application id.
         args : dict
             A dictionary consists of several properties.
             package_code : str
@@ -268,57 +276,63 @@ class ApplicationManager:
         """
         try:
             resp = self.call_api("/applications/select-package", {
-                "application_id": self.id,
+                "application_id": application_id,
                 "package_code": args.get("package_code")
             })
             return resp
         except Exception as err:
             raise err
 
-    def submit( self ):
+    def submit( self, application_id ):
         """
         Submit current application.
 
         Returns
         -------
+        application_id : str
+            An application id.
         dict
             Submitted application.
         """
         try:
             resp = self.call_api("/applications/submit", {
-                "application_id": self.id
+                "application_id": application_id
             })
-            if resp.get("data", {}).get("status"):
+            if resp.get("data", {}).get("status"): # TODO Remove this
                 self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
             raise err
     
-    def confirm( self ):
+    def confirm( self, application_id ):
         """
         Confirm current application.
 
         Returns
         -------
+        application_id : str
+            An application id.
         dict
             Confirmed application.
         """
         try:
             resp = self.call_api("/applications/confirm", {
-                "application_id": self.id
+                "application_id": application_id
             })
-            if resp.get("data", {}).get("status"):
+            if resp.get("data", {}).get("status"): # TODO Remove this
                 self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
             raise err
     
-    def get_2c2p_hash( self, args ):
+    def get_2c2p_hash( self, application_id, args ):
         """
         Get 2C2P hash.
 
         Parameters
         ----------
+        application_id : str
+            An application id.
         args : dict
             frontend_url : str
                 A string of frontend_url.
@@ -330,7 +344,7 @@ class ApplicationManager:
         """
         try:
             resp = self.call_api("/payments/2c2p/get-hash", {
-                "application_id": self.id,
+                "application_id": application_id,
                 "frontend_url": args.get("frontend_url")
             })
             return resp

@@ -9,6 +9,13 @@ from .constants import (
     SUBMIT_APP_DATA,
 )
 
+PRODUCT_ID = "prod_contractor"
+APPLICATION_ID = "sandbox_appl_lb3RhHns4O5hjwXa"
+REF2 = "ref2"
+PACKAGE_CODE = "ACROSURE:MOTOR:VOLUNTARY:110:2017:10:5282:22563:FIRSTCLASS:1_569_3597:390000:N:0:10:30:15"
+
+packages = []
+
 class ApplicationTestCase(unittest.TestCase):
 
     def setUp( self ):
@@ -24,7 +31,7 @@ class ApplicationTestCase(unittest.TestCase):
     
     def test_create_with_empty_data( self ):
         application = self.application
-        resp = application.create(SUBMIT_APP_DATA["product_id"])
+        resp = application.create(PRODUCT_ID)
         self.assertEqual(resp["status"], "ok")
         created_application = resp["data"]
         self.assertTrue(created_application)
@@ -33,34 +40,39 @@ class ApplicationTestCase(unittest.TestCase):
 
     def test_get_application( self ):
         application = self.application
-        resp = application.get()
+        resp = application.get(APPLICATION_ID)
         self.assertEqual(resp["status"], "ok")
         got_application = resp["data"]
         self.assertTrue(got_application)
-        self.assertTrue(got_application["id"], application.id)
+        self.assertTrue(got_application["id"], APPLICATION_ID)
     
     def test_update_application( self ):
         application = self.application
-        resp = application.update( basic_data = SUBMIT_APP_DATA["basic_data"] )
+        resp = application.update(APPLICATION_ID, ref2 = REF2 )
         self.assertEqual(resp["status"], "ok")
         updated_application = resp["data"]
         self.assertTrue(updated_application)
         self.assertTrue(updated_application["id"])
-        self.assertEqual(updated_application["status"], "PACKAGE_REQUIRED")
+        self.assertEqual(updated_application["ref2"], REF2 )
 
     def test_get_packages( self ):
         application = self.application
-        resp = application.get_packages()
+        resp = application.get_packages(APPLICATION_ID)
         self.assertEqual(resp["status"], "ok")
-        self.packages = resp["data"]
-        self.assertIsInstance(self.packages, list)
-        self.assertTrue(len(self.packages) > 0)
+        packages = resp["data"]
+        self.assertIsInstance(packages, list)
+        self.assertTrue(len(packages) > 0)
+        # print("SELF11111111111111111111111111111")
+        # print(len(packages))
     
     def test_select_package( self ):
         application = self.application
-        first_package = self.packages[0]
-        resp = application.select_package({
-            "package_code": first_package["package_code"]
+        # print("SELFFFFFFFFFFFFFFFFFFFF")
+        # print(len(packages))
+        # first_package = packages[0]
+        resp = application.select_package(APPLICATION_ID, {
+            "package_code": PACKAGE_CODE
+            # "package_code": first_package["package_code"]
         })
         self.assertEqual(resp["status"], "ok")
         updated_application = resp["data"]
@@ -68,7 +80,7 @@ class ApplicationTestCase(unittest.TestCase):
     
     def test_get_current_package( self ):
         application = self.application
-        resp = application.get_package()
+        resp = application.get_package(APPLICATION_ID)
         self.assertEqual(resp["status"], "ok")
         current_package = resp["data"]
         self.assertIsInstance(current_package, dict)
@@ -76,6 +88,7 @@ class ApplicationTestCase(unittest.TestCase):
     def test_update_application_with_completed_data( self ):
         application = self.application
         resp = application.update(
+            APPLICATION_ID,
             basic_data = SUBMIT_APP_DATA["basic_data"],
             package_options = SUBMIT_APP_DATA["package_options"],
             additional_data = SUBMIT_APP_DATA["additional_data"]
@@ -88,7 +101,7 @@ class ApplicationTestCase(unittest.TestCase):
 
     def test_submit_application( self ):
         application = self.application
-        resp = application.submit()
+        resp = application.submit(APPLICATION_ID)
         self.assertEqual(resp["status"], "ok")
         submitted_application = resp["data"]
         self.assertTrue(submitted_application)

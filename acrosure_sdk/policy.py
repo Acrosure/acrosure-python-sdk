@@ -12,10 +12,10 @@ class PolicyManager:
         call_api : function
             A function which call Acrosure API.
         """
-        self.id = id
+        self.id = id # TODO Remove this
         self.call_api = call_api
 
-    def set_id( self, id ):
+    def set_id( self, id ): # TODO Remove this
         """
         Set current policy id.
 
@@ -26,13 +26,13 @@ class PolicyManager:
         """
         self.id = id
 
-    def get( self, id = None ):
+    def get( self, policy_id ):
         """
         Get policy with specify id or with current id.
 
         Parameters
         ----------
-        id : str, optional
+        id : str
             A policy id.
 
         Returns
@@ -41,11 +41,8 @@ class PolicyManager:
             Policy.
         """
         try:
-            if id:
-                self.id = id
-            # resp = self.call_api("/policies/get", {
-            resp = self.call_api("/success", {
-                "policy_id": self.id
+            resp = self.call_api("/policies/get", {
+                "policy_id": policy_id
             })
             return resp
         except Exception as err:

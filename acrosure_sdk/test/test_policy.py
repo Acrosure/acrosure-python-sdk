@@ -8,7 +8,7 @@ from .constants import (
     TEST_PUBLIC_KEY,
 )
 
-TEST_POLICY_ID = "plcy_sample"
+TEST_POLICY_ID = "sandbox_plcy_ICDWOcfcx0CtdMVB"
 
 class PolicyTestCase(unittest.TestCase):
 
