@@ -256,7 +256,7 @@ class ApplicationManager:
         except Exception as err:
             raise err
 
-    def select_package( self, application_id, args ):
+    def select_package( self, application_id, package_code ):
         """
         Select package for current application.
 
@@ -264,10 +264,8 @@ class ApplicationManager:
         ----------
         application_id : str
             An application id.
-        args : dict
-            A dictionary consists of several properties.
-            package_code : str
-                A string of package_code.
+        package_code : str
+            A string of package_code.
 
         Returns
         -------
@@ -277,7 +275,7 @@ class ApplicationManager:
         try:
             resp = self.call_api("/applications/select-package", {
                 "application_id": application_id,
-                "package_code": args.get("package_code")
+                "package_code": package_code
             })
             return resp
         except Exception as err:

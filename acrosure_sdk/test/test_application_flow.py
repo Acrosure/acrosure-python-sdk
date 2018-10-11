@@ -64,9 +64,10 @@ class ApplicationFlowTestCase(unittest.TestCase):
     def test_select_package( self ):
         application = self.application
         first_package = self.__class__.PACKAGES[0]
-        resp = application.select_package(self.__class__.APP_ID, {
-            "package_code": first_package["package_code"]
-        })
+        resp = application.select_package(
+            application_id = self.__class__.APP_ID,
+            package_code = first_package["package_code"]
+        )
         self.assertEqual(resp["status"], "ok")
         updated_application = resp["data"]
         self.assertEqual(updated_application["status"], "DATA_REQUIRED")
