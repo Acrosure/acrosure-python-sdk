@@ -56,44 +56,44 @@ class ApplicationFlowTestCase(unittest.TestCase):
         self.assertTrue(updated_application["id"])
         self.assertEqual(updated_application["ref1"], REF1)
 
-    # def test_get_packages( self ):
-    #     application = self.application
-    #     resp = application.get_packages(self.__class__.APP_ID)
-    #     self.assertEqual(resp["status"], "ok")
-    #     self.__class__.PACKAGES = resp["data"]
-    #     self.assertIsInstance(self.__class__.PACKAGES, list)
-    #     self.assertTrue(len(self.__class__.PACKAGES) > 0)
+    def test_get_packages( self ):
+        application = self.application
+        resp = application.get_packages(self.__class__.APP_ID)
+        self.assertEqual(resp["status"], "ok")
+        self.__class__.PACKAGES = resp["data"]
+        self.assertIsInstance(self.__class__.PACKAGES, list)
+        self.assertTrue(len(self.__class__.PACKAGES) > 0)
     
-    # def test_select_package( self ):
-    #     application = self.application
-    #     first_package = self.__class__.PACKAGES[0]
-    #     resp = application.select_package(self.__class__.APP_ID, {
-    #         "package_code": first_package["package_code"]
-    #     })
-    #     self.assertEqual(resp["status"], "ok")
-    #     updated_application = resp["data"]
-    #     self.assertEqual(updated_application["status"], "DATA_REQUIRED")
+    def test_select_package( self ):
+        application = self.application
+        first_package = self.__class__.PACKAGES[0]
+        resp = application.select_package(self.__class__.APP_ID, {
+            "package_code": first_package["package_code"]
+        })
+        self.assertEqual(resp["status"], "ok")
+        updated_application = resp["data"]
+        self.assertEqual(updated_application["status"], "DATA_REQUIRED")
     
-    # def test_get_current_package( self ):
-    #     application = self.application
-    #     resp = application.get_package(self.__class__.APP_ID)
-    #     self.assertEqual(resp["status"], "ok")
-    #     current_package = resp["data"]
-    #     self.assertIsInstance(current_package, dict)
+    def test_get_current_package( self ):
+        application = self.application
+        resp = application.get_package(self.__class__.APP_ID)
+        self.assertEqual(resp["status"], "ok")
+        current_package = resp["data"]
+        self.assertIsInstance(current_package, dict)
 
-    # def test_update_application_with_completed_data( self ):
-    #     application = self.application
-    #     resp = application.update(
-    #         self.__class__.APP_ID,
-    #         basic_data = CONFIRM_APP_DATA["basic_data"],
-    #         package_options = CONFIRM_APP_DATA["package_options"],
-    #         additional_data = CONFIRM_APP_DATA["additional_data"]
-    #     ) 
-    #     self.assertEqual(resp["status"], "ok")
-    #     updated_application = resp["data"]
-    #     self.assertTrue(updated_application)
-    #     self.assertTrue(updated_application["id"])
-    #     self.assertEqual(updated_application["status"], "READY")
+    def test_update_application_with_completed_data( self ):
+        application = self.application
+        resp = application.update(
+            self.__class__.APP_ID,
+            basic_data = CONFIRM_APP_DATA["basic_data"],
+            package_options = CONFIRM_APP_DATA["package_options"],
+            additional_data = CONFIRM_APP_DATA["additional_data"]
+        ) 
+        self.assertEqual(resp["status"], "ok")
+        updated_application = resp["data"]
+        self.assertTrue(updated_application)
+        self.assertTrue(updated_application["id"])
+        self.assertEqual(updated_application["status"], "READY")
     
     def test_confirm_application( self ):
         admin_client = AcrosureClient(
