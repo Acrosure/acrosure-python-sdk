@@ -232,7 +232,7 @@ is_signature_valid = acrosure_client.verify_webhook(
 
 ## Advanced Usage
 
-Please refer to [this document](https://acrosure.github.io/acrosure-python-sdk/AcrosureClient.html) for AcrosureClient usage.
+Please refer to [this document](https://github.com/Acrosure/acrosure-python-sdk/wiki/AcrosureClient) for AcrosureClient usage.
 
 And refer to [Acrosure API Document](https://docs.acrosure.com/docs/api-overall.html) for more details on Acrosure API.
 
