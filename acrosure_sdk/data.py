@@ -1,3 +1,5 @@
+from .utils import decorate
+
 class DataManager:
     """
     Represents an DataManager. (You most likely shouldn't be accessing this directly, use {@link AcrosureClient#data} instead.)
@@ -12,18 +14,16 @@ class DataManager:
         """
         self.call_api = call_api
     
-    def get( self, args = {} ):
+    def get( self, handler, dependencies = None ):
         """
         Get data from a handler.
 
         Parameters
         ----------
-        args : dict
-            A dictionary consists of several properties.
-            handler : str, optional
-                A handler string.
-            dependencies : list, optional
-                An array of dependencies (if needed).
+        handler : str
+            A handler string.
+        dependencies : list, optional
+            An array of dependencies (if needed).
 
         Returns
         -------
@@ -32,7 +32,11 @@ class DataManager:
         """
 
         try:
-            resp = self.call_api("/data/get", args)
+            body = decorate({
+                "handler": handler,
+                "dependencies": dependencies,
+            })
+            resp = self.call_api("/data/get", body)
             return resp
         except Exception as err:
             raise err
