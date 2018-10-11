@@ -10,6 +10,11 @@ Install via pip:
 
 `pip install acrosure_sdk`
 
+## Requirements
+
+* Python 2.7.1+
+* `requests` library
+
 ## Getting Started
 
 Import AcrosureClient into your project.
