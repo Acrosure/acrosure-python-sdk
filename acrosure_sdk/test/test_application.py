@@ -9,10 +9,6 @@ from .constants import (
     SUBMIT_APP_DATA,
 )
 
-REF2 = "reference2"
-
-packages = []
-
 class ApplicationTestCase(unittest.TestCase):
     APP_id = []
     PACKAGES = []

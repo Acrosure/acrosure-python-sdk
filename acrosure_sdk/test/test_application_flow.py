@@ -10,8 +10,6 @@ from .constants import (
     CONFIRM_APP_DATA,
 )
 
-REF1 = "reference 1"
-
 class ApplicationFlowTestCase(unittest.TestCase):
 
     APP_ID = ""
@@ -36,7 +34,6 @@ class ApplicationFlowTestCase(unittest.TestCase):
         self.assertTrue(created_application["id"])
         self.assertEqual(created_application["status"], "INITIAL")
         self.__class__.APP_ID = created_application["id"]
-        print(created_application["id"])
 
     def test_get_application( self ):
         application = self.application
@@ -49,12 +46,12 @@ class ApplicationFlowTestCase(unittest.TestCase):
     
     def test_update_application( self ):
         application = self.application
-        resp = application.update( self.__class__.APP_ID, ref1 = REF1 )
+        resp = application.update( self.__class__.APP_ID, basic_data = CONFIRM_APP_DATA["basic_data"])
         self.assertEqual(resp["status"], "ok")
         updated_application = resp["data"]
         self.assertTrue(updated_application)
         self.assertTrue(updated_application["id"])
-        self.assertEqual(updated_application["ref1"], REF1)
+        self.assertEqual(updated_application["status"], "PACKAGE_REQUIRED")
 
     def test_get_packages( self ):
         application = self.application
