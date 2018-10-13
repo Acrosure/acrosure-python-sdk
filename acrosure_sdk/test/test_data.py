@@ -20,14 +20,14 @@ class DataTestCase(unittest.TestCase):
         self.assertIsInstance(client, AcrosureClient)
         self.assertIsInstance(data, DataManager)
 
-    def test_get_data_value_with_no_dependencies( self ):
+    def test_1_get_data_value_with_no_dependencies( self ):
         data = self.data
         resp = data.get(handler = "province")
         self.assertEqual(resp["status"], "ok")
         values = resp["data"]
         self.assertIsInstance(values, list)
 
-    def test_get_data_value_with_one_dependencies( self ):
+    def test_2_get_data_value_with_one_dependencies( self ):
         data = self.data
         resp = data.get(
             handler = "district",
@@ -37,7 +37,7 @@ class DataTestCase(unittest.TestCase):
         values = resp["data"]
         self.assertIsInstance(values, list)
 
-    def test_get_data_value_with_two_dependencies( self ):
+    def test_3_get_data_value_with_two_dependencies( self ):
         data = self.data
         resp = data.get(
             handler = "subdistrict",

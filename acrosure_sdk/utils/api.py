@@ -15,8 +15,6 @@ def api( path, body = None, token = None):
         response = requests.post(API_URL + path,
             data = json.dumps(body),
             headers = headers)
-        if not response:
-            raise Exception("no response")
         data = response.json()
         return data
     except Exception as err:

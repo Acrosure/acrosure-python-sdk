@@ -14,7 +14,7 @@ class ApplicationRemainingEndPointsTestCase(unittest.TestCase):
         self.client = AcrosureClient(TEST_PUBLIC_KEY)
         self.application = self.client.application
 
-    def test_list_applications( self ):
+    def test_1_list_applications( self ):
         application = self.application
         resp = application.list()
         self.assertEqual(resp["status"], "ok")

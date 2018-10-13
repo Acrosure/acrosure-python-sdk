@@ -14,13 +14,13 @@ class TeamTestCase(unittest.TestCase):
         self.client = AcrosureClient(TEST_PUBLIC_KEY)
         self.team = self.client.team
     
-    def test_instance_of_acrosure( self ):
+    def test_1_instance_of_acrosure( self ):
         client = self.client
         team = self.team
         self.assertIsInstance(client, AcrosureClient)
         self.assertIsInstance(team, TeamManager)
 
-    def test_get_team_info( self ):
+    def test_2_get_team_info( self ):
         team = self.team
         resp = team.get_info()
         self.assertEqual(resp["status"], "ok")

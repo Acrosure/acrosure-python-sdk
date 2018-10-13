@@ -17,9 +17,5 @@ class ClientTestCase(unittest.TestCase):
         )
         self.assertTrue(is_valid)
 
-    # def test_call_api( self ):
-    #     resp = self.client.call_api("/success")
-    #     self.assertEqual(resp["status"], "ggwp!")
-
 if __name__ == '__main__':
     unittest.main()
