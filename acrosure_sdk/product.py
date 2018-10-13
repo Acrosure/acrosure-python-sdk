@@ -12,20 +12,8 @@ class ProductManager:
         call_api : function
             A function which call Acrosure API.
         """
-        self.id = id # TODO Remove this
         self.call_api = call_api
  
-    def set_id( self, id ): # TODO Remove this
-        """
-        Set current product id.
-
-        Parameters
-        ----------
-        id : str
-            A product id.
-        """
-        self.id = id
-
     def get( self, product_id ):
         """
         Get product with specify id or with current id.

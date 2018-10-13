@@ -14,19 +14,7 @@ class ApplicationManager:
         call_api : function
             A function which call Acrosure API.
         """
-        self.id = id # TODO Remove this
         self.call_api = call_api
-
-    def set_id( self, id ): # TODO Remove this
-        """
-        Set current application id.
-
-        Parameters
-        ----------
-        id : str
-            An application id.
-        """
-        self.id = id
 
     def get( self, application_id ):
         """
@@ -46,8 +34,6 @@ class ApplicationManager:
             resp = self.call_api("/applications/get", {
                 "application_id": application_id
             })
-            if resp.get("data", {}).get("status"): # TODO Remove this
-                self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
             raise err
@@ -136,10 +122,6 @@ class ApplicationManager:
             resp = self.call_api("/applications/create", body)
             if not resp:
                 raise("no response")
-            if resp.get("data", {}).get("id"): # TODO remove id
-                self.id = resp.get("data").get("id")
-            if resp.get("data", {}).get("status"): # TODO remove status
-                self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
             raise err
@@ -206,8 +188,6 @@ class ApplicationManager:
                 "step": step
             })
             resp = self.call_api("/applications/update", body)
-            if resp.get("data", {}).get("status"): # TODO Remove this
-                self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
             raise err
@@ -296,8 +276,6 @@ class ApplicationManager:
             resp = self.call_api("/applications/submit", {
                 "application_id": application_id
             })
-            if resp.get("data", {}).get("status"): # TODO Remove this
-                self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
             raise err
@@ -317,8 +295,6 @@ class ApplicationManager:
             resp = self.call_api("/applications/confirm", {
                 "application_id": application_id
             })
-            if resp.get("data", {}).get("status"): # TODO Remove this
-                self.status = resp.get("data").get("status")
             return resp
         except Exception as err:
             raise err

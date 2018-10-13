@@ -12,19 +12,7 @@ class PolicyManager:
         call_api : function
             A function which call Acrosure API.
         """
-        self.id = id # TODO Remove this
         self.call_api = call_api
-
-    def set_id( self, id ): # TODO Remove this
-        """
-        Set current policy id.
-
-        Parameters
-        ----------
-        id : str
-            A policy id.
-        """
-        self.id = id
 
     def get( self, policy_id ):
         """

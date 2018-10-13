@@ -58,7 +58,7 @@ class AcrosureClient:
         self.data = DataManager(call_api = call_api)
         self.team = TeamManager(call_api = call_api)
     
-    def call_api( self, path, data = None ): # TODO make data mandatory / not callable
+    def call_api( self, path, data = None ):
         """
         Call Acrosure API with corresponding url & current API key.
 
