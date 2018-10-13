@@ -9,8 +9,6 @@ else:
 
 def api( path, body = None, token = None):
     try:
-        print('API############')
-        print(API_URL)
         headers = {"Content-Type": "application/json"}
         if token:
             headers["Authorization"] = "Bearer " + token
