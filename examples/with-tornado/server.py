@@ -3,12 +3,13 @@
 import tornado.ioloop
 import tornado.web
 from acrosure_sdk import AcrosureClient
+import os
 import json
 
 from data import APP_DATA
 
 acrosure_client = AcrosureClient(
-  token = "tokn_sample_secret"
+  token = os.environ.get('TEST_SECRET_TOKEN')
 )
 
 class MainHandler(tornado.web.RequestHandler):
