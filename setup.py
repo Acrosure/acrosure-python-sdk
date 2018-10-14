@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="acrosure_sdk",
-    version="0.9.1",
+    version="0.9.2",
     author="Jetarin Chokchaipermpoonphol",
     author_email="jetarin.min@gmail.com",
     description="SDK for Acrosure api",
