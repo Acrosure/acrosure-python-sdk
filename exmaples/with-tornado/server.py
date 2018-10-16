@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import tornado.ioloop
 import tornado.web
 from acrosure_sdk import AcrosureClient

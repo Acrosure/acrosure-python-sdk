@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from ..client import AcrosureClient
+from acrosure_sdk import (
+    AcrosureClient,
+    version
+)
 
 from .constants import TEST_SECRET_KEY
 

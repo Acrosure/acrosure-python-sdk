@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-
 import unittest
-from ..client import AcrosureClient
-from ..policy import PolicyManager
+from acrosure_sdk import AcrosureClient
+from acrosure_sdk.policy import PolicyManager
 
 from .constants import (
     TEST_PUBLIC_KEY,
