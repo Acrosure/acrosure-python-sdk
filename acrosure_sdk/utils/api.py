@@ -2,10 +2,10 @@ import os
 import requests
 import json
 
-if os.environ.get('ENV') == 'test':
-    API_URL = "https://api.phantompage.com"
-else:
+if os.environ.get('API_URL') is None:
     API_URL = "https://api.acrosure.com"
+else:
+    API_URL = os.environ.get('API_URL')
 
 def api( path, body = None, token = None):
     try:
