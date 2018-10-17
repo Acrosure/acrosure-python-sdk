@@ -2,17 +2,16 @@ import os
 import requests
 import json
 
-if os.environ.get('API_URL') is None:
-    API_URL = "https://api.acrosure.com"
-else:
-    API_URL = os.environ.get('API_URL')
+API_URL = "https://api.acrosure.com"
 
-def api( path, body = None, token = None):
+def api( path, body = None, token = None, api_url = None):
     try:
+        if not api_url:
+            api_url = API_URL
         headers = {"Content-Type": "application/json"}
         if token:
             headers["Authorization"] = "Bearer " + token
-        response = requests.post(API_URL + path,
+        response = requests.post(api_url + path,
             data = json.dumps(body),
             headers = headers)
         data = response.json()

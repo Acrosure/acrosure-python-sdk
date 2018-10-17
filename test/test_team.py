@@ -1,15 +1,17 @@
 import unittest
 from acrosure_sdk import AcrosureClient
 from acrosure_sdk.team import TeamManager
-
 from .constants import (
     TEST_PUBLIC_KEY,
 )
+import os
+
+API_URL = os.environ.get('API_URL')
 
 class TeamTestCase(unittest.TestCase):
 
     def setUp( self ):
-        self.client = AcrosureClient(TEST_PUBLIC_KEY)
+        self.client = AcrosureClient(TEST_PUBLIC_KEY, API_URL)
         self.team = self.client.team
     
     def test_1_instance_of_acrosure( self ):

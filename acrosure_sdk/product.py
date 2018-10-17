@@ -3,12 +3,10 @@ class ProductManager:
     Represents a ProductManager. (You most likely shouldn't be accessing this directly, use {@link AcrosureClient#product} instead.)
     """
 
-    def __init__( self, id, call_api ):
+    def __init__( self, call_api ):
         """
         Parameters
         ----------
-        id : str
-            Current managing product id.
         call_api : function
             A function which call Acrosure API.
         """

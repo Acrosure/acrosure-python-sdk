@@ -1,11 +1,13 @@
 import unittest
 from acrosure_sdk import AcrosureClient
 from acrosure_sdk.application import ApplicationManager
-
 from .constants import (
     TEST_PUBLIC_KEY,
     SUBMIT_APP_DATA,
 )
+import os
+
+API_URL = os.environ.get('API_URL')
 
 class ApplicationTestCase(unittest.TestCase):
 
@@ -13,7 +15,7 @@ class ApplicationTestCase(unittest.TestCase):
     PACKAGES = []
 
     def setUp( self ):
-        self.client = AcrosureClient(TEST_PUBLIC_KEY)
+        self.client = AcrosureClient(TEST_PUBLIC_KEY, API_URL)
         self.application = self.client.application
         self.packages = []
     

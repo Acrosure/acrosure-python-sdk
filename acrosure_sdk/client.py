@@ -25,36 +25,32 @@ class AcrosureClient:
         A class for policy api
     data : class
         A class for data api
+    team : class
+        A class for team api
     token : str
         An access token
 
     Methods
     -------
-    call_api( token = token, path = path, data = data )
+    call_api( token = token, path = path, data = data, api_url = api_url )
         Call Acrosure API with corresponding url & current API key.
     """
 
-    def __init__( self, token, application_id = None, product_id = None ):
+    def __init__( self, token, api_url = None ):
         """
         Parameters
         ----------
         token : str
             An access token
-        application_id : str, optional
-            A application id
-        product_id : str, optional
-            A product id
+        api_url : str
+            An API end point.
         """
-
         self.token = token
+        self.api_url = api_url
         call_api = self.call_api
-        # def call_api( path, data = None ):
-        #     return api( path, data, self.token )
-
-        self.application = ApplicationManager(id = application_id, call_api = call_api)
-        self.product = ProductManager(id = product_id, call_api = call_api)
-        self.policy = PolicyManager(id = None, call_api =call_api)
-        # self.policy = PolicyManager(call_api = call_api)
+        self.application = ApplicationManager(call_api = call_api)
+        self.product = ProductManager(call_api = call_api)
+        self.policy = PolicyManager(call_api = call_api)
         self.data = DataManager(call_api = call_api)
         self.team = TeamManager(call_api = call_api)
     
@@ -68,9 +64,11 @@ class AcrosureClient:
             An API path.
         data : dict
             A data object which is specified by Acrosure.
+        api_url : str
+            An API end point.
         """
 
-        return api( path, data, self.token )
+        return api( path, data, self.token, self.api_url )
 
     def verify_signature( self, signature, data ):
         """

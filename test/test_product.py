@@ -1,17 +1,19 @@
 import unittest
 from acrosure_sdk import AcrosureClient
 from acrosure_sdk.product import ProductManager
-
 from .constants import (
     TEST_PUBLIC_KEY,
 )
+import os
+
+API_URL = os.environ.get('API_URL')
 
 class ProductTestCase(unittest.TestCase):
 
     PRODUCTS = []
 
     def setUp( self ):
-        self.client = AcrosureClient(TEST_PUBLIC_KEY)
+        self.client = AcrosureClient(TEST_PUBLIC_KEY, API_URL)
         self.product = self.client.product
     
     def test_1_instance_of_acrosure( self ):

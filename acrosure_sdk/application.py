@@ -5,12 +5,10 @@ class ApplicationManager:
     Represents an ApplicationManager. (You most likely shouldn't be accessing this directly, use {@link AcrosureClient#application} instead.)
     """
 
-    def __init__( self, id, call_api ):
+    def __init__( self, call_api ):
         """
         Parameters
         ----------
-        id : string
-            Current managing application id.
         call_api : function
             A function which call Acrosure API.
         """

@@ -5,13 +5,15 @@ from acrosure_sdk import (
     AcrosureClient,
     version
 )
-
 from .constants import TEST_SECRET_KEY
+import os
+
+API_URL = os.environ.get('API_URL')
 
 class ClientTestCase(unittest.TestCase):
 
     def setUp( self ):
-        self.client = AcrosureClient(TEST_SECRET_KEY)
+        self.client = AcrosureClient(TEST_SECRET_KEY, API_URL)
 
     def test_verify_webhook_signature( self ):
         is_valid = self.client.verify_signature(

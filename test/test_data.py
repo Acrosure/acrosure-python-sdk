@@ -3,15 +3,17 @@
 import unittest
 from acrosure_sdk import AcrosureClient
 from acrosure_sdk.data import DataManager
-
 from .constants import (
     TEST_PUBLIC_KEY,
 )
+import os
+
+API_URL = os.environ.get('API_URL')
 
 class DataTestCase(unittest.TestCase):
 
     def setUp( self ):
-        self.client = AcrosureClient(TEST_PUBLIC_KEY)
+        self.client = AcrosureClient(TEST_PUBLIC_KEY, API_URL)
         self.data = self.client.data
     
     def test_instance_of_acrosure( self ):

@@ -3,12 +3,10 @@ class PolicyManager:
     Represents an PolicyManager. (You most likely shouldn't be accessing this directly, use {@link AcrosureClient#policy} instead.)
     """
 
-    def __init__( self, id, call_api ):
+    def __init__( self, call_api ):
         """
         Parameters
         ----------
-        id: str
-            A policy id.
         call_api : function
             A function which call Acrosure API.
         """
@@ -20,7 +18,7 @@ class PolicyManager:
 
         Parameters
         ----------
-        id : str
+        policy_id : str
             A policy id.
 
         Returns

@@ -1,12 +1,14 @@
 import unittest
 from acrosure_sdk import AcrosureClient
 from acrosure_sdk.application import ApplicationManager
-
 from .constants import (
     TEST_PUBLIC_KEY,
     TEST_SECRET_KEY,
     CONFIRM_APP_DATA,
 )
+import os
+
+API_URL = os.environ.get('API_URL')
 
 class ApplicationFlowTestCase(unittest.TestCase):
 
@@ -14,7 +16,7 @@ class ApplicationFlowTestCase(unittest.TestCase):
     PACKAGES = []
 
     def setUp( self ):
-        self.client = AcrosureClient(TEST_PUBLIC_KEY)
+        self.client = AcrosureClient(TEST_PUBLIC_KEY, API_URL)
         self.application = self.client.application
     
     def test_1_instance_of_acrosure( self ):
@@ -94,6 +96,7 @@ class ApplicationFlowTestCase(unittest.TestCase):
     def test_9_confirm_application( self ):
         admin_client = AcrosureClient(
             token = TEST_SECRET_KEY,
+            api_url = API_URL
         )
         application = admin_client.application
         resp = application.confirm(self.__class__.APP_ID)
