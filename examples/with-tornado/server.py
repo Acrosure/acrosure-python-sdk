@@ -7,7 +7,8 @@ import json
 from data import APP_DATA
 
 acrosure_client = AcrosureClient(
-  token = os.environ.get('TEST_SECRET_TOKEN')
+  token = os.environ.get('TEST_SECRET_TOKEN'),
+  api_url = os.environ.get('TEST_API_URL')
 )
 
 class MainHandler(tornado.web.RequestHandler):
