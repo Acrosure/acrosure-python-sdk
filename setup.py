@@ -3,9 +3,14 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+install_reqs = [
+    'requests',
+]
+
 setuptools.setup(
     name="acrosure_sdk",
-    version="1.0.0",
+    version="1.0.1",
+    install_requires=install_reqs,
     author="Jetarin Chokchaipermpoonphol",
     author_email="jetarin.min@gmail.com",
     description="SDK for Acrosure api",

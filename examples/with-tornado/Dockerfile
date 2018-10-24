@@ -4,7 +4,6 @@ ADD server.py /
 ADD data.py /
 
 RUN pip3 install tornado
-RUN pip3 install requests
-RUN python3 -m pip install acrosure_sdk==1.0.0
+RUN python3 -m pip install acrosure_sdk==1.0.1
 
 CMD [ "python3", "./server.py" ]
